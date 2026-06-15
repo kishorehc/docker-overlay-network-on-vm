@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:latest
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: any
+    networks:
+      - kish-lay  # Using your existing overlay network
+    ports:
+      - "8080:80"
+
+
+networks:
+  kish-lay:
+    external: true  # IMPORTANT: tells Docker to use existing network
+    name: kish-lay  # Your existing network name
